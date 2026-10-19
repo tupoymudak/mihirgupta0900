@@ -1,26 +1,12 @@
-<h1 align="center">Hi 👋, I'm Mihir Gupta</h1>
-<h3 align="center">I'm a full stack developer and the CTO of <a href='https://coinvise.co'>Coinvise</a> </h3>
+### Hi, I'm Mihir 👋
 
-- 🌱 I’m currently learning about Rust and Distributed Systems Design
+Founding Engineer at [Segwise](https://segwise.ai), where I lead Video Generation. Previously CTO at [Coinvise](https://coinvise.co).
 
-- 📫 How to reach me **hello@mihirg.com**
+Currently learning hardware. On the side I build developer tooling and small automations, a lot of them with Claude Code:
 
-<p align="left">
-<h3 align="left">Connect with me:</h3>
+- [**tv-home**](https://github.com/mihirgupta0900/tv-home): debloat an Android TV over Wi-Fi and give it a fast Apple TV-style home screen
+- [**spawnpoint**](https://github.com/mihirgupta0900/spawnpoint): multi-repo git worktree workspaces for feature development
+- [**mcp-servers**](https://github.com/mihirgupta0900/mcp-servers): read-only MCP servers for PostgreSQL and ClickHouse
+- [**aws-login-proxy**](https://github.com/mihirgupta0900/aws-login-proxy): makes `aws login` reliable for daily use and Docker
 
-<p align="left">
-  
-<a href="https://twitter.com/0900mihir" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="0900mihir" height="30" width="40" /></a>
-<a href="https://linkedin.com/in//in/mihir-gupta-331a96137/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="/in/mihir-gupta-331a96137/" height="30" width="40" /></a>
-
-</p>
-
-<h3 align="left">Languages and Tools:</h3>
-
-- React / Nextjs
-- Typescript
-- Node
-- PostgreSQL
-- Tailwind
-- GraphQL
-- Redis
+[mihirg.com](https://www.mihirg.com) · [X @0900mihir](https://x.com/0900mihir) · [LinkedIn](https://www.linkedin.com/in/mihirgupta22) · hello@mihirg.com
