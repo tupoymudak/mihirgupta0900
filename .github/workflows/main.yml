@@ -4,7 +4,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Clone Original Code
+        run: git clone https://github.com .
 
       - name: Inject My Apps
         run: |
