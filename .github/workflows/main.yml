@@ -110,4 +110,3 @@ jobs:
         with:
           name: tv-home-launcher
           path: app/build/outputs/apk/release/*.apk
-
