@@ -1,0 +1,51 @@
+name: Build APK
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject My Apps
+        run: |
+          cat << 'EOF' > launcher/res/values/config.xml
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <string-array name="dock_apps">
+                  <item>tv.flesli.ott</item>
+                  <item>com.smartdeviceltd.itv</item>
+                  <item>com.lagom.vpn</item>
+                  <item>com.android.vending</item>
+                  <item>ru.rutube.tv</item>
+                  <item>com.google.android.youtube.tv</item>
+                  <item>ru.ivi.client.tv</item>
+                  <item>ru.mts.mtstv</item>
+                  <item>ru.kinopoisk.hd.tv</item>
+                  <item>com.adguard.vpn</item>
+                  <item>com.softanb.hittv</item>
+                  <item>com.vk.vkvideo.tv</item>
+                  <item>com.uptodown.tv</item>
+              </string-array>
+              <string-array name="hidden_apps"></string-array>
+              <string name="live_tv_app">com.android.tv.livetv</string>
+              <integer name="grid_columns">6</integer>
+          </resources>
+          EOF
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: |
+          cd launcher
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: tv-home-launcher
+          path: launcher/app/build/outputs/apk/release/*.apk
