@@ -46,6 +46,7 @@ jobs:
 
       - name: Build APK with Gradle
         run: |
+          cd launcher
           gradle assembleRelease
 
       - name: Upload APK
