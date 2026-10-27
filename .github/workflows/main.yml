@@ -11,7 +11,7 @@ jobs:
 
       - name: Inject My Apps Configuration
         run: |
-          cat << 'EOF' > res/values/config.xml
+          cat << 'EOF' > launcher/res/values/config.xml
           <?xml version="1.0" encoding="utf-8"?>
           <resources>
               <string-array name="dock_apps">
@@ -52,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tv-home-launcher
-          path: app/build/outputs/apk/release/*.apk
+          path: launcher/app/build/outputs/apk/release/*.apk
