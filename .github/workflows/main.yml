@@ -44,7 +44,7 @@ jobs:
           }
           EOF
           
-          # Создаем манифест приложения Android
+          # Создаем ИСПРАВЛЕННЫЙ манифест приложения Android
           cat << 'EOF' > launcher/app/src/main/AndroidManifest.xml
           <manifest xmlns:android="http://android.com">
               <application android:label="TV Home">
@@ -68,9 +68,8 @@ jobs:
           public class MainActivity extends Activity {
               @Override
               protected void onCreate(Bundle savedInstanceState) {
-                  super.onCreate(Bundle savedInstanceState) {
-                      finish();
-                  }
+                  super.onCreate(savedInstanceState);
+                  finish();
               }
           }
           EOF
