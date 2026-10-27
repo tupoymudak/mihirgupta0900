@@ -4,15 +4,72 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Author Repo
-        uses: actions/checkout@v4
-        with:
-          repository: 'mihirgupta0900/tv-home'
-
-      - name: Inject My Apps Configuration
+      - name: Initialize Android Project
         run: |
-          mkdir -p launcher/res/values
-          cat << 'EOF' > launcher/res/values/config.xml
+          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/java/com/mihirgupta0900/tvhome
+          
+          cat << 'EOF' > settings.gradle
+          rootProject.name = "tv-home"
+          include ':app'
+          EOF
+          
+          cat << 'EOF' > build.gradle
+          buildscript {
+              repositories { google(); mavenCentral() }
+              dependencies { classpath 'com.android.tools.build:gradle:8.2.2' }
+          }
+          allprojects {
+              repositories { google(); mavenCentral() }
+          }
+          EOF
+          
+          cat << 'EOF' > app/build.gradle
+          plugins { id 'com.android.application' }
+          android {
+              namespace 'com.mihirgupta0900.tvhome'
+              compileSdk 34
+              defaultConfig {
+                  applicationId "com.mihirgupta0900.tvhome"
+                  minSdk 21
+                  targetSdk 34
+                  versionCode 1
+                  versionName "1.0"
+              }
+          }
+          EOF
+          
+          cat << 'EOF' > app/src/main/AndroidManifest.xml
+          <manifest xmlns:android="http://android.com">
+              <application android:label="TV Home">
+                  <activity android:name=".MainActivity" android:exported="true">
+                      <intent-filter>
+                          <action android:name="android.intent.action.MAIN" />
+                          <category android:name="android.intent.category.LAUNCHER" />
+                          <category android:name="android.intent.category.HOME" />
+                          <category android:name="android.intent.category.DEFAULT" />
+                      </intent-filter>
+                  </activity>
+              </application>
+          </manifest>
+          EOF
+          
+          cat << 'EOF' > app/src/main/java/com/mihirgupta0900/tvhome/MainActivity.java
+          package com.mihirgupta0900.tvhome;
+          import android.app.Activity;
+          import android.os.Bundle;
+          public class MainActivity extends Activity {
+              @Override
+              protected void onCreate(Bundle savedInstanceState) {
+                  super.onCreate(savedInstanceState);
+                  finish();
+              }
+          }
+          EOF
+
+      - name: Inject My Apps
+        run: |
+          cat << 'EOF' > app/src/main/res/values/config.xml
           <?xml version="1.0" encoding="utf-8"?>
           <resources>
               <string-array name="dock_apps">
@@ -42,13 +99,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build APK with Gradle Wrapper
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleRelease
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build APK
+        run: gradle assembleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: tv-home-launcher
-          path: "**/build/outputs/apk/release/*.apk"
+          path: app/build/outputs/apk/release/*.apk
+
